@@ -3,14 +3,48 @@ window.onload = function () {
     savedTabs.forEach(function (tabName) {
         createNewTab(tabName);
     });
+    populateSubcategorySelect();
 };
 
 function saveTabsToStorage() {
-    var tabButtons = document.querySelectorAll('.tablinks.subtablinks');
-    var tabNames = Array.from(tabButtons).map(function (tabButton) {
-        return tabButton.textContent;
+    var categoryTexts = document.querySelectorAll('.tablinks.subtablinks .category-text');
+    var tabNames = Array.from(categoryTexts).map(function (span) {
+        return span.textContent.trim();
     });
     localStorage.setItem('tabs', JSON.stringify(tabNames));
+}
+
+function addButtonToSubcategory() {
+    alert("Function called!"); // This confirms the function is being triggered.
+
+    // Get the value from the dropdown to know which subcategory to append to.
+    var subcategory = document.getElementById("subcategorySelect").value;
+
+    // Create a new button element.
+    var newButton = document.createElement("button");
+    newButton.innerHTML = "New Button"; // Set the button text. You may want to make this dynamic.
+
+    // Append the new button to the correct sub-category.
+    // Assuming your sub-categories have IDs like "subcategory1-content", "subcategory2-content", etc.
+    var targetDiv = document.getElementById(subcategory + "-content");
+    if (targetDiv) {
+        targetDiv.appendChild(newButton);
+    } else {
+        alert("No target div found for subcategory: " + subcategory);
+    }
+}
+
+
+function populateSubcategorySelect() {
+    var subcategories = document.querySelectorAll('.subtablinks .category-text');
+    var select = document.getElementById('subcategorySelect');
+    select.innerHTML = ""; // Clear the current options
+    subcategories.forEach(function(subcategory) {
+        var option = document.createElement('option');
+        option.value = subcategory.textContent.trim().toLowerCase().replace(/\s+/g, '');
+        option.textContent = subcategory.textContent.trim();
+        select.appendChild(option);
+    });
 }
 
 function toggleSubTab(subtabName) {
@@ -33,9 +67,13 @@ function generateNewCategory() {
 function createNewTab(categoryName) {
     var tabContainer = document.createElement("div");
     var newTabContent = document.createElement("div");
+    var categoryText = document.createElement("span"); // Create a span for the category name
     
+    categoryText.textContent = categoryName;
+    categoryText.className = "category-text"; // Assign a class name if you want to style it
+
     tabContainer.className = "tablinks subtablinks";
-    tabContainer.textContent = categoryName;
+    tabContainer.appendChild(categoryText); // Append the category name span to the container
     tabContainer.onclick = function () {
         openTab(event, categoryName.toLowerCase().replace(/\s+/g, ''));
         openSubTab(event, categoryName.toLowerCase().replace(/\s+/g, ''));
@@ -46,19 +84,19 @@ function createNewTab(categoryName) {
     removeButton.className = "remove-button";
     removeButton.onclick = function (event) {
         removeCategory(categoryName);
-        event.stopPropagation();
+        event.stopPropagation(); // Prevent the tab click event from firing
     };
 
     tabContainer.appendChild(removeButton);
     tabContainer.id = categoryName.toLowerCase().replace(/\s+/g, ''); // Assign unique ID to tab container
 
     newTabContent.className = "tabcontent subtabcontent";
-    newTabContent.innerHTML = "Content for " + categoryName + " tab goes here.";
+    newTabContent.innerHTML = "<h2>Content for " + categoryName + " tab goes here.</h2>";
+    newTabContent.id = categoryName.toLowerCase().replace(/\s+/g, '') + "-content"; // Assign unique ID to tab content
 
     document.querySelector('#creator-content').appendChild(tabContainer); // Append to creator mode tab container
     document.querySelector('#creator-content').appendChild(newTabContent); // Append to creator mode tab content
 }
-
 
 
 
@@ -136,7 +174,6 @@ function generateReference() {
 }
 
 
-
 function showMainCategory(category) {
     var mainContent = document.getElementById('main-content');
     var creatorContent = document.getElementById('creator-content');
@@ -155,3 +192,6 @@ function showMainCategory(category) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById("yourButtonId").addEventListener("click", addButtonToSubcategory);
+});
