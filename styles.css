@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+.tabs {
+    display: flex;
+    flex-direction: column; /* Stack tabs vertically */
+    margin-bottom: 20px;
+}
+
+.tablinks {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 12px 16px;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tablinks:hover {
+    background-color: #ddd;
+}
+
+.tablinks.active {
+    background-color: #ccc;
+}
+
+.subtabs .subtablinks {
+    display: block;
+    margin-left: 15px; /* Indent the sub-category tab */
+}
+
+.subtabs .subtablinks.active {
+    background-color: #ccc;
+}
+
+.subtabs .subtabcontent {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    margin-left: 30px; /* Indent the sub-category content */
+}
+
+
+.subtablinks.active {
+    display: block;
+}
+
+/* Style for Nielson's Heuristics tab */
+#nielson.tabcontent.subtabcontent {
+    margin-left: 30px; /* Indent the sub-category tab */
+}
+
+#generateReference {
+    display: none;
+}
+
+.main-categories {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.main-category {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 12px 16px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.main-category:hover {
+    background-color: #ddd;
+}
+
+#main-content, #creator-content, #settings-content {
+    display: none;
+    /* Add additional styling for the main content containers if needed */
+}

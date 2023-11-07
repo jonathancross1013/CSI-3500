@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referencing Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Referencing Tool</h1>
+    </header>
+
+<div class="main-categories">
+    <button class="main-category" onclick="showMainCategory('main')">Main</button>
+    <button class="main-category" onclick="showMainCategory('creator')">Creator Mode</button>
+    <button class="main-category" onclick="showMainCategory('settings')">Settings</button>
+</div>
+
+<div class="main-content">
+    <div id="main-content" class="tabcontent">
+        <div class="tabs">
+    <button class="tablinks" onclick="openTab(event, 'favorites')">Favorites</button>
+    <button class="tablinks" onclick="openTab(event, 'accessibility')">Accessibility</button>
+    <button class="tablinks" onclick="openTab(event, 'usability')">Usability</button>
+</div>
+    </div>
+    <div id="creator-content" class="tabcontent">
+    <button class="tablinks" onclick="generateNewCategory()">Generate New Reference Category</button>
+    <button class="tablinks" onclick="openTab(event, 'generateReference')">Generate User Reference</button>
+    </div>
+    <div id="settings-content" class="tabcontent">
+        <!-- Content for the Settings category goes here -->
+    </div>
+</div>
+
+<div id="generateReference" class="tabcontent">
+    <label for="inputText">Enter your reference:</label>
+    <textarea id="inputText" rows="4" cols="50"></textarea>
+    <button onclick="generateReference()">Generate Reference</button>
+    <div id="output"></div>
+</div>
+    <div id="favorites" class="tabcontent">
+        <!-- Content for the Favorites tab goes here -->
+    </div>
+    <div id="accessibility" class="tabcontent">
+        <!-- Content for the Accessibility tab goes here -->
+    </div>
+<div id="usability" class="tabcontent" style="display: none;">
+    <div class="subtabs">
+        <button class="subtablinks" onclick="toggleSubTab('nielson')">Nielson's Heuristics</button>
+        <button class="subtablinks" onclick="toggleSubTab('morelaws')">Other Laws</button>
+    </div>
+<div id="nielson" class="tabcontent subtabcontent" style="display: none;">
+    <h2>10 Usability Heuristics</h2>
+    <ol>
+        <li><strong>Visibility of System Status:</strong> The system should always keep users informed about what is going on, through appropriate feedback within reasonable time.</li>
+        <li><strong>Match between System and the Real World:</strong> The system should speak the users' language, with words, phrases, and concepts familiar to the user, rather than system-oriented terms.</li>
+        <li><strong>User Control and Freedom:</strong> Users often choose system functions by mistake and will need a clearly marked "emergency exit" to leave the unwanted state without having to go through an extended dialogue.</li>
+        <li><strong>Consistency and Standards:</strong> Users should not have to wonder whether different words, situations, or actions mean the same thing. Follow platform conventions.</li>
+        <li><strong>Error Prevention:</strong> Even better than good error messages is a careful design that prevents a problem from occurring in the first place.</li>
+        <li><strong>Recognition rather than Recall:</strong> Minimize the user's memory load by making objects, actions, and options visible. The user should not have to remember information from one part of the dialogue to another.</li>
+        <li><strong>Flexibility and Efficiency of Use:</strong> Accelerators—unseen by the novice user—may often speed up the interaction for the expert user such that the system can cater to both inexperienced and experienced users.</li>
+        <li><strong>Aesthetic and Minimalist Design:</strong> Dialogues should not contain information which is irrelevant or rarely needed. Every extra unit of information in a dialogue competes with the relevant units of information and diminishes their relative visibility.</li>
+        <li><strong>Help Users Recognize, Diagnose, and Recover from Errors:</strong> Error messages should be expressed in plain language (no codes), precisely indicate the problem, and constructively suggest a solution.</li>
+        <li><strong>Help and Documentation:</strong> Even though it is better if the system can be used without documentation, it may be necessary to provide help and documentation. Any such information should be easy to search, focused on the user's task, list concrete steps to be carried out, and not be too large.</li>
+    </ol>
+</div>
+<div id="morelaws" class="tabcontent subtabcontent" style="display: none;">
+    <h2>10 Different Ones</h2>
+    <ol>
+        <li><strong>asdf of System Status:</strong> Text.</li>
+    </ol>
+</div>
+</div>
+    <main>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
