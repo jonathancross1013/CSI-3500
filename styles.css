@@ -59,12 +59,26 @@ header {
 
 /* Style for Nielson's Heuristics tab */
 #nielson.tabcontent.subtabcontent {
-    margin-left: 30px; /* Indent the sub-category tab */
+    margin-left: 30px;
 }
 
+
 #generateReference {
-    display: none;
+    display: none; /* Hide by default */
+    flex-direction: column; /* Stack children vertically */
+    align-items: flex-start; /* Align items to the start of the cross axis */
 }
+
+
+#generateReference label,
+#generateReference select,
+#generateReference input,
+#generateReference textarea,
+#generateReference button {
+    width: 30%; /* Make sure each element takes full width */
+    margin-bottom: 10px; /* Adds space between elements */
+}
+
 
 .main-categories {
     display: flex;
