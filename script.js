@@ -14,26 +14,6 @@ function saveTabsToStorage() {
     localStorage.setItem('tabs', JSON.stringify(tabNames));
 }
 
-function addButtonToSubcategory() {
-    alert("Function called!"); // This confirms the function is being triggered.
-
-    // Get the value from the dropdown to know which subcategory to append to.
-    var subcategory = document.getElementById("subcategorySelect").value;
-
-    // Create a new button element.
-    var newButton = document.createElement("button");
-    newButton.innerHTML = "New Button"; // Set the button text. You may want to make this dynamic.
-
-    // Append the new button to the correct sub-category.
-    // Assuming your sub-categories have IDs like "subcategory1-content", "subcategory2-content", etc.
-    var targetDiv = document.getElementById(subcategory + "-content");
-    if (targetDiv) {
-        targetDiv.appendChild(newButton);
-    } else {
-        alert("No target div found for subcategory: " + subcategory);
-    }
-}
-
 
 function populateSubcategorySelect() {
     var subcategories = document.querySelectorAll('.subtablinks .category-text');
@@ -55,6 +35,51 @@ function toggleSubTab(subtabName) {
         subtab.style.display = 'none';
     }
 }
+
+
+function toggleTabContent(tabId) {
+    var content = document.getElementById(tabId);
+    
+    // If the content is already visible, hide it
+    if (content.style.display === "block") {
+        content.style.display = "none";
+    } else {
+        // Hide all tabcontent elements
+        var tabcontents = document.getElementsByClassName("tabcontent");
+        for (var i = 0; i < tabcontents.length; i++) {
+            tabcontents[i].style.display = "none";
+        }
+        
+        // Show the clicked tab's content
+        content.style.display = "block";
+    }
+}
+
+// Attach the toggle function to the main category buttons
+var mainCategoryButtons = document.getElementsByClassName("main-category");
+for (var i = 0; i < mainCategoryButtons.length; i++) {
+    mainCategoryButtons[i].addEventListener('click', function() {
+        var contentId = this.getAttribute('data-content-id');
+        toggleTabContent(contentId);
+    });
+}
+
+
+function toggleSubTabContent(subTabId) {
+    var i, subtabcontent;
+
+    // Get all elements with class="subtabcontent" and toggle their display
+    subtabcontent = document.getElementsByClassName("subtabcontent");
+    for (i = 0; i < subtabcontent.length; i++) {
+        // If it's the subtab we're interested in, toggle it. Otherwise, hide it.
+        if (subtabcontent[i].id === subTabId) {
+            subtabcontent[i].style.display = subtabcontent[i].style.display === 'block' ? 'none' : 'block';
+        } else {
+            subtabcontent[i].style.display = 'none';
+        }
+    }
+}
+
 
 
 function generateNewCategory() {
@@ -139,37 +164,45 @@ function openSubTab(evt, subtabName) {
     evt.currentTarget.className += " active";
 }
 
-function generateReference() {
-    var inputText = document.getElementById("inputText").value;
-    var outputDiv = document.getElementById("output");
+function addButtonToSubcategory() {
+    var buttonName = document.getElementById('newButtonName').value.trim();
+    var buttonContent = document.getElementById('newButtonContent').value.trim();
+    var selectedSubcategory = document.getElementById('subcategorySelect').value;
 
-    // Basic referencing logic (you can extend this based on your needs)
-    var bookPattern = /(\b[A-Z][a-z]*\b), (\b[A-Z][a-z]*\b)\. \((\d{4})\)\. (\b.+?\b)\. (\b[A-Z][a-z]*\b)\: (\b.+?\b)\./;
-    var websitePattern = /(\b.+?\b)\. \((\d{4})\)\. (\b.+?\b)\. (\b.+?\b)\./;
+    if (!buttonName || !buttonContent) {
+        alert('Please fill out the name and content for the button.');
+        return;
+    }
 
-    var bookMatch = inputText.match(bookPattern);
-    var websiteMatch = inputText.match(websitePattern);
+    var newButton = document.createElement('button');
+    newButton.textContent = buttonName;
+    newButton.onclick = function() {
+        alert(buttonContent);
+    };
 
-    if (bookMatch) {
-        var authorLastName = bookMatch[1];
-        var authorFirstName = bookMatch[2];
-        var year = bookMatch[3];
-        var title = bookMatch[4];
-        var publisher = bookMatch[5];
-        var location = bookMatch[6];
-
-        var reference = `${authorLastName}, ${authorFirstName}. (${year}). ${title}. ${publisher}: ${location}.`;
-        outputDiv.innerHTML = `<p>Generated Reference: <br>${reference}</p>`;
-    } else if (websiteMatch) {
-        var siteName = websiteMatch[1];
-        var year = websiteMatch[2];
-        var title = websiteMatch[3];
-        var url = websiteMatch[4];
-
-        var reference = `${siteName}. (${year}). ${title}. Available at: ${url}.`;
-        outputDiv.innerHTML = `<p>Generated Reference: <br>${reference}</p>`;
+    var subcategoryDiv = document.getElementById(selectedSubcategory);
+    if (subcategoryDiv) {
+        subcategoryDiv.appendChild(newButton);
     } else {
-        outputDiv.innerHTML = "<p>Invalid input. Please check your formatting.</p>";
+        alert('Selected sub-category does not exist.');
+    }
+
+    // Clear input fields
+    document.getElementById('newButtonName').value = '';
+    document.getElementById('newButtonContent').value = '';
+}
+
+
+function toggleReferenceDisplay(tabName) {
+    var referenceDiv = document.getElementById('generateReference');
+
+    // Check if the clicked tab is the one associated with the generateReference div
+    if (tabName === 'generateReference') {
+        // Toggle the 'active' class based on whether it's already present
+        referenceDiv.classList.toggle('active');
+    } else {
+        // Ensure the 'active' class is removed if another tab is clicked
+        referenceDiv.classList.remove('active');
     }
 }
 
@@ -194,4 +227,14 @@ function showMainCategory(category) {
 
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("yourButtonId").addEventListener("click", addButtonToSubcategory);
+
+    var tabLinks = document.getElementsByClassName("tablinks");
+    for (var i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].addEventListener('click', function() {
+            var tabId = this.getAttribute('data-tab-id');
+            toggleTabContent(tabId);
+
+
+        });
+    }
 });
