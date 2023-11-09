@@ -13,7 +13,7 @@ header {
 
 .tabs {
     display: flex;
-    flex-direction: column; /* Stack tabs vertically */
+    flex-direction: column;
     margin-bottom: 20px;
 }
 
@@ -41,7 +41,7 @@ header {
 
 .subtabs .subtablinks {
     display: block;
-    margin-left: 15px; /* Indent the sub-category tab */
+    margin-left: 15px;
 }
 
 .subtabs .subtablinks.active {
@@ -61,31 +61,29 @@ header {
     display: block;
 }
 
-/* Style for Nielson's Heuristics tab */
 #nielson.tabcontent.subtabcontent {
     margin-left: 30px;
 }
 
 
 #generateReference {
-    display: none; /* Keeps the div hidden initially */
-    flex-direction: column; /* Stack the children vertically */
-    align-items: center; /* Center the children horizontally in the container */
-    justify-content: center; /* Center the children vertically in the container */
-    width: 100%; /* Takes the full width */
-    /* Other styles like padding or margins can go here */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 #generateReference.active {
-    display: flex; /* Display the container when .active is added */
+    display: flex;
 }
 
 #generateReference input,
 #generateReference textarea,
 #generateReference select,
 #generateReference button {
-    width: 30%; /* Adjust the width as needed */
-    margin-bottom: 10px; /* Adds space between elements */
+    width: 30%;
+    margin-bottom: 10px;
 }
 
 #generateReference input[type="text"],
@@ -94,9 +92,9 @@ header {
     width: 40%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #009688; /* Teal blue border */
+    border: 1px solid #009688;
     border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 150, 136, 0.2); /* Teal blue shadow */
+    box-shadow: 0 2px 5px rgba(0, 150, 136, 0.2);
     transition: border-color 0.3s, box-shadow 0.3s;
     outline: none;
 }
@@ -104,8 +102,8 @@ header {
 #generateReference input[type="text"]:focus,
 #generateReference textarea:focus,
 #generateReference select:focus {
-    border-color: #00796B; /* Darker teal blue for focus */
-    box-shadow: 0 0 8px rgba(0, 121, 107, 0.6); /* More pronounced shadow for focus */
+    border-color: #00796B;
+    box-shadow: 0 0 8px rgba(0, 121, 107, 0.6);
 }
 
 #generateReference button {
@@ -113,7 +111,7 @@ header {
     margin-bottom: 15px;
     border: none;
     border-radius: 4px;
-    background-color: #009688; /* Teal blue background */
+    background-color: #009688;
     color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -123,8 +121,8 @@ header {
 
 #generateReference button:hover,
 #generateReference button:focus {
-    background-color: #00796B; /* Darker teal blue on hover/focus */
-    box-shadow: 0 2px 10px rgba(0, 150, 136, 0.4); /* Darker shadow on hover */
+    background-color: #00796B;
+    box-shadow: 0 2px 10px rgba(0, 150, 136, 0.4);
 }
 
 
@@ -150,11 +148,9 @@ header {
 
 #main-content, #creator-content, #settings-content {
     display: none;
-    /* Add additional styling for the main content containers if needed */
 }
 
 
-/* Style the buttons that are used to open the tab content */
 .tablinks, .subtablinks {
   background-color: #f1f1f1;
   float: left;
@@ -166,20 +162,42 @@ header {
   font-size: 17px;
 }
 
-/* Change background color of buttons on hover */
 .tablinks:hover, .subtablinks:hover {
   background-color: #ddd;
 }
 
-/* Create an active/current "tab button" class */
 .tablinks.active, .subtablinks.active {
   background-color: #ccc;
 }
 
-/* Style the tab content (and add some padding for the text) */
-.tabcontent, .subtabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
+.tabcontent,
+.subtabcontent {
+    display: none;
+    padding: 20px;
+    /* Remove borders completely */
+    border: none;
+    margin-bottom: 20px;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+    border: none;
+    box-shadow: none;
+}
+
+*, *:before, *:after {
+    border: none;
+    box-shadow: none;
+}
+
+.dark-mode * {
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.dark-mode header {
+  background-color: #1e1e1e; /* Dark background for the header */
+  color: #ffffff; /* Light text for readability */
 }
