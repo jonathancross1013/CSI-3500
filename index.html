@@ -11,24 +11,25 @@
         <h1>Referencing Tool</h1>
     </header>
 
-    <div class="main-categories">
-        <button class="main-category" onclick="showMainCategory('main')">Main</button>
-        <button class="main-category" onclick="showMainCategory('creator')">User References</button>
-        <button class="main-category" onclick="showMainCategory('settings')">Settings</button>
-    </div>
+<div class="main-categories">
+    <button class="main-category" data-content-id="main-content">Main</button>
+    <button class="main-category" data-content-id="creator-content">User References</button>
+    <button class="main-category" data-content-id="settings-content">Settings</button>
+</div>
 
     <div class="main-content">
         <div id="main-content" class="tabcontent">
-            <div class="tabs">
-                <button class="tablinks" onclick="openTab(event, 'favorites')">Favorites</button>
-                <button class="tablinks" onclick="openTab(event, 'accessibility')">Accessibility</button>
-                <button class="tablinks" onclick="openTab(event, 'usability')">Usability</button>
-            </div>
+<div class="tabs">
+<button class="subtablinks" onclick="toggleSubTabContent('favorites')">Favorites</button>
+<button class="subtablinks" onclick="toggleSubTabContent('accessibility')">Accessibility</button>
+<button class="subtablinks" onclick="toggleSubTabContent('usability')">Usability</button>
+
+</div>
         </div>
         <div id="creator-content" class="tabcontent">
             <div class="tabs">
                 <button class="tablinks" onclick="generateNewCategory()">Generate New Reference Category</button>
-                <button class="tablinks" onclick="openTab(event, 'generateReference')">Generate User Reference</button>
+                <button class="tablinks" onclick="toggleReferenceDisplay('generateReference')">Generate New Reference</button>
             </div>
         </div>
         <div id="settings-content" class="tabcontent">
@@ -36,31 +37,28 @@
         </div>
     </div>
 
-<div id="generateReference" class="tabcontent">
-    <label for="subcategorySelect">Choose a sub-category:</label>
-    <select id="subcategorySelect">
-        <!-- Options will be dynamically generated here -->
-    </select>
-    <label for="newButtonName">Name of Reference:</label>
-    <input type="text" id="newButtonName">
-    <label for="newButtonContent">Provide Content of Reference:</label>
-    <textarea id="newButtonContent" rows="4" cols="50"></textarea>
-    <button onclick="addButtonToSubcategory()">Add Button to Sub-category</button>
-    <div id="output"></div>
-</div>
+    <div id="generateReference">
+       <input type="text" id="newButtonName" placeholder="Reference Name">
+       <textarea id="newButtonContent" placeholder="Reference Content"></textarea>
+       <select id="subcategorySelect">
+           <!-- Options will be dynamically populated -->
+       </select>
+        <button onclick="addButtonToSubcategory()">Add Reference to Sub-category</button>
+        <div id="output"></div>
+    </div>
 
-    <div id="favorites" class="tabcontent">
+    <div id="favorites" class="tabcontent subtabcontent" style="display: none;">
         <!-- Content for the Favorites tab goes here -->
     </div>
-    <div id="accessibility" class="tabcontent">
+    <div id="accessibility" class="tabcontent subtabcontent" style="display: none;">
         <!-- Content for the Accessibility tab goes here -->
     </div>
-    <div id="usability" class="tabcontent" style="display: none;">
+    <div id="usability" class="tabcontent subtabcontent" style="display: none;">
         <div class="subtabs">
             <button class="subtablinks" onclick="toggleSubTab('nielson')">Nielson's Heuristics</button>
-            <button class="subtablinks" onclick="toggleSubTab('morelaws')">Other Laws</button>
+            <button class="subtablinks" onclick="toggleSubTab('ucd')">User-Centered Design</button>
         </div>
-        <div id="nielson" class="tabcontent subtabcontent" style="display: none;">
+                <div id="nielson" class="tabcontent subtabcontent" style="display: none;">
                 <h2>10 Usability Heuristics</h2>
     <ol>
         <li><strong>Visibility of System Status:</strong> The system should always keep users informed about what is going on, through appropriate feedback within reasonable time.</li>
@@ -75,12 +73,28 @@
         <li><strong>Help and Documentation:</strong> Even though it is better if the system can be used without documentation, it may be necessary to provide help and documentation. Any such information should be easy to search, focused on the user's task, list concrete steps to be carried out, and not be too large.</li>
     </ol>
         </div>
-        <div id="morelaws" class="tabcontent subtabcontent" style="display: none;">
-            <h2>Placeholder</h2>
+ <div id="ucd" class="tabcontent subtabcontent" style="display: none;">
+            	<h2>User-Centered Design</h2>
     <ol>
-        <li><strong>asdf</li>
+<ol>
+ 	<li><strong>Understand:</strong> Conduct extensive research to understand the target users, their needs, goals, and pain points.</li>
+ 	<li><strong>Define:</strong> Distill insights into clear design goals, including user personas, scenarios, and the design problem.</li>
+	<li><strong>Ideate:</strong> Encourage creative brainstorming and concept generation to explore potential solutions.</li>
+	<li><strong>Prototype:</strong> Create low-fidelity and high-fidelity representations of design concepts.</li>
+  	<li><strong>Test:</strong> Conduct usability testing with real users to gather feedback and insights.</li>
+  	<li><strong>Iterate:</strong> Refine the design based on testing feedback through an iterative process.</li>
+  	<li><strong>Implement:</strong> Develop the final product or system according to the approved design specifications.</li>
+  	<li><strong>Evaluate:</strong> Continuously evaluate the product's performance and user satisfaction after launch.</li>
+  	<li><strong>Maintain and Evolve:</strong> Maintain the product, adapt to changing user needs, and make ongoing improvements.</li>
+</ol>
+
         </div>
     </div>
+
+    <!-- Make sure to include the JavaScript file for functionality -->
+    <script src="script.js"></script>
+</body>
+</html>
 
     <script src="script.js"></script>
 </body>
