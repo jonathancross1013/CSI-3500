@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #009688;
     color: white;
     text-align: center;
     padding: 1rem;
@@ -33,6 +33,10 @@ header {
 
 .tablinks.active {
     background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
 }
 
 .subtabs .subtablinks {
@@ -64,20 +68,65 @@ header {
 
 
 #generateReference {
-    display: none; /* Hide by default */
-    flex-direction: column; /* Stack children vertically */
-    align-items: flex-start; /* Align items to the start of the cross axis */
+    display: none; /* Keeps the div hidden initially */
+    flex-direction: column; /* Stack the children vertically */
+    align-items: center; /* Center the children horizontally in the container */
+    justify-content: center; /* Center the children vertically in the container */
+    width: 100%; /* Takes the full width */
+    /* Other styles like padding or margins can go here */
 }
 
+#generateReference.active {
+    display: flex; /* Display the container when .active is added */
+}
 
-#generateReference label,
-#generateReference select,
 #generateReference input,
 #generateReference textarea,
+#generateReference select,
 #generateReference button {
-    width: 30%; /* Make sure each element takes full width */
+    width: 30%; /* Adjust the width as needed */
     margin-bottom: 10px; /* Adds space between elements */
 }
+
+#generateReference input[type="text"],
+#generateReference textarea,
+#generateReference select {
+    width: 40%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #009688; /* Teal blue border */
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 150, 136, 0.2); /* Teal blue shadow */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+
+#generateReference input[type="text"]:focus,
+#generateReference textarea:focus,
+#generateReference select:focus {
+    border-color: #00796B; /* Darker teal blue for focus */
+    box-shadow: 0 0 8px rgba(0, 121, 107, 0.6); /* More pronounced shadow for focus */
+}
+
+#generateReference button {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #009688; /* Teal blue background */
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#generateReference button:hover,
+#generateReference button:focus {
+    background-color: #00796B; /* Darker teal blue on hover/focus */
+    box-shadow: 0 2px 10px rgba(0, 150, 136, 0.4); /* Darker shadow on hover */
+}
+
 
 
 .main-categories {
@@ -102,4 +151,35 @@ header {
 #main-content, #creator-content, #settings-content {
     display: none;
     /* Add additional styling for the main content containers if needed */
+}
+
+
+/* Style the buttons that are used to open the tab content */
+.tablinks, .subtablinks {
+  background-color: #f1f1f1;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tablinks:hover, .subtablinks:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tablinks.active, .subtablinks.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content (and add some padding for the text) */
+.tabcontent, .subtabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
 }
