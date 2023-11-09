@@ -20,7 +20,7 @@
     <div class="main-content">
         <div id="main-content" class="tabcontent">
 <div class="tabs">
-<button class="subtablinks" onclick="toggleSubTabContent('favorites')">Favorites</button>
+<button class="subtablinks" onclick="toggleSubTabContent('favorites')">Bookmarked References</button>
 <button class="subtablinks" onclick="toggleSubTabContent('accessibility')">Accessibility</button>
 <button class="subtablinks" onclick="toggleSubTabContent('usability')">Usability</button>
 
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div id="settings-content" class="tabcontent">
-            <!-- Content for the Settings category goes here -->
+            <button id="dark-mode-toggle">Toggle Dark Mode</button>
         </div>
     </div>
 
@@ -51,7 +51,20 @@
         <!-- Content for the Favorites tab goes here -->
     </div>
     <div id="accessibility" class="tabcontent subtabcontent" style="display: none;">
-        <!-- Content for the Accessibility tab goes here -->
+	<div class="subtabs">
+            <button class="subtablinks" onclick="toggleSubTab('ada')">Americans with Disabilities Act (ADA)</button>
+        </div>
+                        <div id="ada" class="tabcontent subtabcontent" style="display: none;">
+                <h2>Americans with Disabilities Act (ADA)</h2>
+<ol>
+    <li><strong>Title I: Employment</strong> – Prohibits discrimination in employment and requires reasonable accommodations for employees with disabilities.</li>
+    <li><strong>Title II: Public Entities and Transportation</strong> – Requires public services and transportation to be accessible to individuals with disabilities.</li>
+    <li><strong>Title III: Public Accommodations and Services Operated by Private Entities</strong> – Mandates accessibility and non-discrimination in all new constructions and modifications of facilities and requires existing facilities to remove barriers where readily achievable.</li>
+    <li><strong>Title IV: Telecommunications</strong> – Ensures telephone and television access for individuals with hearing and speech disabilities.</li>
+    <li><strong>Title V: Miscellaneous Provisions</strong> – Includes a range of additional provisions such as anti-retaliation protections, conditions for attorney’s fees, and clarifications on state immunity.</li>
+</ol>
+
+        </div>
     </div>
     <div id="usability" class="tabcontent subtabcontent" style="display: none;">
         <div class="subtabs">
