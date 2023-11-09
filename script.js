@@ -238,3 +238,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     }
 });
+// Function to toggle dark mode
+function toggleDarkMode() {
+  var body = document.body;
+  body.classList.toggle('dark-mode');
+
+  if (body.classList.contains('dark-mode')) {
+    localStorage.setItem('darkMode', 'enabled');
+  } else {
+    localStorage.setItem('darkMode', 'disabled');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var darkModeToggleButton = document.getElementById('dark-mode-toggle');
+  if (darkModeToggleButton) {
+    darkModeToggleButton.addEventListener('click', toggleDarkMode);
+  }
+
+  if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+  }
+});
+
