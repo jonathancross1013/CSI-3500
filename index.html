@@ -5,17 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Referencing Tool</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
+    <header id="header">
         <h1>Referencing Tool</h1>
     </header>
 
-<div class="main-categories">
-    <button class="main-category" data-content-id="main-content">Main</button>
-    <button class="main-category" data-content-id="creator-content">User References</button>
-    <button class="main-category" data-content-id="settings-content">Settings</button>
-</div>
+    <div id="sidebar">
+        <div class="sidebar-link" onclick="showMainCategory('main')">Main</div>
+        <div class="sidebar-link" onclick="showMainCategory('creator')">
+           <i class="fas fa-user"></i> User References
+        </div>
+        <div class="sidebar-link" onclick="showMainCategory('settings')">
+           <i class="fas fa-cog"></i> Settings
+        </div>
+        <div id="dark-mode-toggle" class="sidebar-link">
+           <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
+           <i class="fas fa-sun" style="display: none;"></i> <!-- Sun icon for light mode, hidden by default -->
+           <span id="dark-mode-text">Dark Mode</span> <!-- Text element for mode -->
+        </div>
+
+        <div class="sidebar-link" onclick="showMainCategory('region')">Change Region</div>
+        <!-- Add more sidebar links as needed -->
+    </div>
 
     <div class="main-content">
         <div id="main-content" class="tabcontent">
@@ -33,7 +46,9 @@
             </div>
         </div>
         <div id="settings-content" class="tabcontent">
-            <button id="dark-mode-toggle">Toggle Dark Mode</button>
+<button id="changeHeaderColorButton">Change Color of Header</button>
+<input type="color" id="headerColorPicker" title="Choose header color" style="display:none;">
+
         </div>
     </div>
 
@@ -46,7 +61,6 @@
         <button onclick="addButtonToSubcategory()">Add Reference to Sub-category</button>
         <div id="output"></div>
     </div>
-
     <div id="favorites" class="tabcontent subtabcontent" style="display: none;">
         <!-- Content for the Favorites tab goes here -->
     </div>
