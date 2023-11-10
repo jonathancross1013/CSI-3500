@@ -9,6 +9,7 @@ header {
     color: white;
     text-align: center;
     padding: 1rem;
+    margin: 0 auto; /* This will center the content if width is less than 100% */
 }
 
 .tabs {
@@ -37,6 +38,10 @@ header {
 
 .tabcontent {
     display: none;
+    width: 50%; /* Example value, adjust based on your design */
+    margin: 0 auto; /* This will center the content if width is less than 100% */
+    padding: 20px;
+    box-sizing: border-box; /* To include padding in the width */
 }
 
 .subtabs .subtablinks {
@@ -200,4 +205,75 @@ header {
 .dark-mode header {
   background-color: #1e1e1e; /* Dark background for the header */
   color: #ffffff; /* Light text for readability */
+}
+
+#sidebar {
+    height: 100vh; /* Full height */
+    width: 250px; /* Set a sidebar width */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    border-right: 2px solid #818181;
+}
+
+#sidebar .sidebar-link {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+#sidebar .sidebar-link:hover {
+    color: #f1f1f1;
+    background-color: #575757;
+}
+
+#sidebar .sidebar-link.active {
+    background-color: #009688;
+    color: white;
+}
+
+#sidebar .sidebar-link i.fas.fa-cog {
+    margin-right: 5px;
+}
+
+#sidebar .sidebar-link:hover i.fas.fa-cog {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+#sidebar .sidebar-link i.fas.fa-user {
+    margin-right: 8px;
+}
+
+#sidebar .sidebar-link:hover i.fas.fa-user {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+#dark-mode-toggle .fa-moon,
+#dark-mode-toggle .fa-sun {
+    margin-right: 8px;
+}
+
+#dark-mode-toggle:hover .fa-sun,
+#dark-mode-toggle:hover .fa-moon {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+
+
+.main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
