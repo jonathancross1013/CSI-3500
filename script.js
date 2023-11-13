@@ -338,6 +338,17 @@ function changeHeaderColor(event) {
     header.style.backgroundColor = event.target.value;
 }
 
+function toggleFontSizeDropdown() {
+    // This function will toggle the display of the font size selector dropdown
+    var fontSizeDropdown = document.getElementById('fontSizeSelector');
+    fontSizeDropdown.style.display = fontSizeDropdown.style.display === 'none' ? 'block' : 'none';
+}
+
+function changeFontSize(fontSize) {
+    // This function will apply the selected font size to the entire site
+    document.documentElement.style.fontSize = fontSize;
+}
+
 
 function toggleColorPicker() {
     var colorPickerContainer = document.getElementById('color-picker-container');
