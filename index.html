@@ -13,22 +13,29 @@
     </header>
 
     <div id="sidebar">
-        <div class="sidebar-link" onclick="showMainCategory('main')">Main</div>
+<img src="C:\Users\Robert Cross\Documents\College\Year 6 - Oakland University\Fall '23\Human Computer Interaction\Website\Images\logo.png" alt="Logo" id="sidebar-logo">
+        <div class="sidebar-link" onclick="showMainCategory('main')">
+           <i class="fas fa-book"></i> Main
+        </div>
         <div class="sidebar-link" onclick="showMainCategory('creator')">
            <i class="fas fa-user"></i> User References
         </div>
-        <div class="sidebar-link" onclick="showMainCategory('settings')">
-           <i class="fas fa-cog"></i> Settings
-        </div>
-        <div id="dark-mode-toggle" class="sidebar-link">
-           <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
-           <i class="fas fa-sun" style="display: none;"></i> <!-- Sun icon for light mode, hidden by default -->
-           <span id="dark-mode-text">Dark Mode</span> <!-- Text element for mode -->
-        </div>
-
-        <div class="sidebar-link" onclick="showMainCategory('region')">Change Region</div>
-        <!-- Add more sidebar links as needed -->
+    <div class="sidebar-link settings-dropdown-toggle" onclick="toggleSettingsDropdown()">
+        <i class="fas fa-cog"></i> Settings
     </div>
+    <div id="settings-dropdown" class="settings-dropdown-content" style="display: none;">
+        <button onclick="openColorPicker()">Change Header Color</button>
+    </div>
+        <div id="dark-mode-toggle" class="sidebar-link">
+           <i class="fas fa-moon"></i>
+           <i class="fas fa-sun" style="display: none;"></i> <!-- Sun icon for light mode, hidden by default -->
+           <span id="dark-mode-text">Dark Mode</span>
+        </div>
+        <div class="sidebar-link" onclick="showMainCategory('region')">
+           <i class="fas fa-flag"></i> Change Region
+        </div>
+    </div>
+
 
     <div class="main-content">
         <div id="main-content" class="tabcontent">
@@ -56,13 +63,13 @@
        <input type="text" id="newButtonName" placeholder="Reference Name">
        <textarea id="newButtonContent" placeholder="Reference Content"></textarea>
        <select id="subcategorySelect">
-           <!-- Options will be dynamically populated -->
+          
        </select>
         <button onclick="addButtonToSubcategory()">Add Reference to Sub-category</button>
         <div id="output"></div>
     </div>
     <div id="favorites" class="tabcontent subtabcontent" style="display: none;">
-        <!-- Content for the Favorites tab goes here -->
+        
     </div>
     <div id="accessibility" class="tabcontent subtabcontent" style="display: none;">
 	<div class="subtabs">
