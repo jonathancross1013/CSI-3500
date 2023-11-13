@@ -25,6 +25,14 @@
     </div>
     <div id="settings-dropdown" class="settings-dropdown-content" style="display: none;">
         <button onclick="openColorPicker()">Change Header Color</button>
+<button id="font-size-changer-btn" onclick="toggleFontSizeDropdown()">Change Font Size</button>
+    <!-- Font Size Dropdown (initially hidden) -->
+    <select id="fontSizeSelector" onchange="changeFontSize(this.value)" style="display: none;">
+        <option value="12px">Small</option>
+        <option value="16px" selected>Normal</option>
+        <option value="20px">Large</option>
+        <option value="24px">Extra Large</option>
+    </select>
     </div>
         <div id="dark-mode-toggle" class="sidebar-link">
            <i class="fas fa-moon"></i>
