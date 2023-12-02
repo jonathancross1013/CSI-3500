@@ -27,6 +27,19 @@ function populateSubcategorySelect() {
     });
 }
 
+function sendCategoriesToExtension() {
+    var categoryElement = document.getElementById('category-container');
+    if (categoryElement) {
+        try {
+            var categories = [];
+            window.postMessage({ type: "SEND_CATEGORIES", categories: categories }, "*");
+        } catch (error) {
+            console.error("Error sending categories to extension:", error);
+        }
+    }
+}
+
+
 function toggleSubTab(subtabName) {
     var subtab = document.getElementById(subtabName);
     if (subtab.style.display === 'none' || subtab.style.display === '') {
@@ -183,6 +196,7 @@ function addButtonToSubcategory() {
     var newButton = document.createElement('button');
     newButton.textContent = buttonName;
     newButton.onclick = function() {
+    // Concatenate the content with two line breaks and the URL
     var contentWithLink = buttonContent + "\n\n" + "Source: " + buttonURL;
     alert(contentWithLink);
     };
@@ -194,9 +208,10 @@ function addButtonToSubcategory() {
         alert('Selected sub-category does not exist.');
     }
     
+    // Clear the form fields
     document.getElementById('newButtonName').value = '';
     document.getElementById('newButtonContent').value = '';
-    document.getElementById('newButtonURL').value = '';
+    document.getElementById('newButtonURL').value = ''; // Clear the URL field as well
 }
 
 
@@ -340,6 +355,39 @@ function changeFontSize(fontSize) {
     // This function will apply the selected font size to the entire site
     document.documentElement.style.fontSize = fontSize;
 }
+
+function openTextColorPicker() {
+    var colorPicker = document.getElementById('textColorPicker');
+    if (!colorPicker) {
+        colorPicker = document.createElement('input');
+        colorPicker.type = 'color';
+        colorPicker.id = 'textColorPicker';
+        colorPicker.oninput = changeTextColor;
+        colorPicker.style.display = 'none';
+        document.body.appendChild(colorPicker);
+    }
+    colorPicker.click();
+}
+
+function changeTextColor(event) {
+    var textColor = event.target.value;
+    document.body.style.color = textColor; // Apply color to text
+    localStorage.setItem('textColor', textColor); // Save color to localStorage
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var changeTextColorButton = document.getElementById('changeTextColorButton');
+    if (changeTextColorButton) {
+        changeTextColorButton.addEventListener('click', openTextColorPicker);
+    }
+
+    // Load the saved color from localStorage on page load
+    var savedColor = localStorage.getItem('textColor');
+    if (savedColor) {
+        document.body.style.color = savedColor;
+    }
+});
+
 
 
 function toggleColorPicker() {
