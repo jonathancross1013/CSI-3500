@@ -27,19 +27,6 @@ function populateSubcategorySelect() {
     });
 }
 
-function sendCategoriesToExtension() {
-    var categoryElement = document.getElementById('category-container');
-    if (categoryElement) {
-        try {
-            var categories = [];
-            window.postMessage({ type: "SEND_CATEGORIES", categories: categories }, "*");
-        } catch (error) {
-            console.error("Error sending categories to extension:", error);
-        }
-    }
-}
-
-
 function toggleSubTab(subtabName) {
     var subtab = document.getElementById(subtabName);
     if (subtab.style.display === 'none' || subtab.style.display === '') {
@@ -185,17 +172,19 @@ function openSubTab(evt, subtabName) {
 function addButtonToSubcategory() {
     var buttonName = document.getElementById('newButtonName').value.trim();
     var buttonContent = document.getElementById('newButtonContent').value.trim();
+    var buttonURL = document.getElementById('newButtonURL').value.trim();
     var selectedSubcategory = document.getElementById('subcategorySelect').value;
 
-    if (!buttonName || !buttonContent) {
-        alert('Please fill out the name and content for the button.');
+    if (!buttonName || !buttonContent || !buttonURL) {
+        alert('Please fill out the name, content, and URL for the button.');
         return;
     }
 
     var newButton = document.createElement('button');
     newButton.textContent = buttonName;
     newButton.onclick = function() {
-        alert(buttonContent);
+    var contentWithLink = buttonContent + "\n\n" + "Source: " + buttonURL;
+    alert(contentWithLink);
     };
 
     var subcategoryDiv = document.getElementById(selectedSubcategory);
@@ -204,9 +193,12 @@ function addButtonToSubcategory() {
     } else {
         alert('Selected sub-category does not exist.');
     }
+    
     document.getElementById('newButtonName').value = '';
     document.getElementById('newButtonContent').value = '';
+    document.getElementById('newButtonURL').value = '';
 }
+
 
 
 function toggleReferenceDisplay(tabName) {
