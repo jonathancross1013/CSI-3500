@@ -160,6 +160,19 @@ function removeCategory(categoryName) {
         tabContainerToRemove.parentNode.removeChild(tabContainerToRemove);
         saveTabsToStorage();
     }
+
+
+
+    var savedReferences = JSON.parse(localStorage.getItem('references')) || [];
+    
+    var referenceCategoryToRemove = tabContainerToRemove.querySelector('.category-text').innerHTML
+
+    var updatedReferences = savedReferences.filter(function(savedReference) {
+        return savedReference.category !== referenceCategoryToRemove;
+    });
+
+    // Update the localStorage with the new array
+    localStorage.setItem('references', JSON.stringify(updatedReferences));
 }
 
 window.addEventListener('beforeunload', saveTabsToStorage);
