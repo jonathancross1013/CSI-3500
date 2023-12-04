@@ -303,10 +303,16 @@ window.addEventListener('message', function(event) {
 });
 
 function saveReference(name, content, category) {
-    var references = JSON.parse(localStorage.getItem('references')) || [];
-    var newReference = { name: name, content: content, category: category };
-    references.push(newReference);
-    localStorage.setItem('references', JSON.stringify(references));
+    chrome.storage.sync.get('references', function(result) {
+        var references = JSON.parse(chrome.storage.getItem('references')) || [];
+        var newReference = { name: name, content: content, category: category };
+        references.push(newReference);
+        chrome.storage.setItem('references', JSON.stringify(references));
+
+        chrome.storage.sync.set({ 'references' : references }, function(){
+            console.log(newReference);
+        })
+    });
 }
 
 
@@ -385,6 +391,39 @@ document.addEventListener('DOMContentLoaded', function() {
     var savedColor = localStorage.getItem('textColor');
     if (savedColor) {
         document.body.style.color = savedColor;
+    }
+});
+
+
+function openBackgroundColorPicker() {
+    var colorPicker = document.getElementById('backgroundColorPicker')
+    if (!colorPicker) {
+        colorPicker = document.createElement('input');
+        colorPicker.type = 'color';
+        colorPicker.id = 'backgroundColorPicker';
+        colorPicker.oninput = changeBackgroundColor;
+        colorPicker.style.display = 'none';
+        document.body.appendChild(colorPicker);
+    }
+    colorPicker.click();
+}
+
+function changeBackgroundColor(event) {
+    var backgroundColor = event.target.value;
+    document.body.style.backgroundColor = backgroundColor; // Apply color to text
+    localStorage.setItem('backgroundColor', backgroundColor); // Save color to localStorage
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var changeBackgroundColorButton = document.getElementById('changeBackgroundColorButton');
+    if (changeBackgroundColorButton) {
+        changeBackgroundColorButton.addEventListener('click', openBackgroundColorPicker);
+    }
+
+    // Load the saved color from localStorage on page load
+    var savedColor = localStorage.getItem('backgroundColor');
+    if (savedColor) {
+        document.body.style.backgroundColor = savedColor;
     }
 });
 
