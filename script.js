@@ -9,6 +9,8 @@ window.onload = function () {
     savedReferences.forEach(function (savedReferences) {
         updateSubcategory(savedReferences.name, savedReferences.content, savedReferences.url, savedReferences.category)
     });
+    //Remove all references
+    //localStorage.removeItem('references');
 };
 
 function saveTabsToStorage() {
@@ -217,7 +219,7 @@ function addButtonToSubcategory() {
         alert('Selected sub-category does not exist.');
     }
     
-    saveReference(document.getElementById('newButtonName').value, document.getElementById('newButtonContent').value, document.getElementById('newButtonURL').value, document.getElementById('newButtonURL').value)
+    saveReference(document.getElementById('newButtonName').value, document.getElementById('newButtonContent').value, document.getElementById('newButtonURL').value, document.getElementById('subcategorySelect').value)
 
     // Clear the form fields
     document.getElementById('newButtonName').value = '';
@@ -226,16 +228,11 @@ function addButtonToSubcategory() {
 }
 
 function updateSubcategory(buttonName, buttonContent, url, selectedSubcategory) {
-    buttonName = buttonName;
-    buttonContent = buttonContent;
-    buttonURL = url;
-    selectedSubcategory = selectedSubcategory;
-
     var newButton = document.createElement('button');
     newButton.textContent = buttonName;
     newButton.onclick = function() {
     // Concatenate the content with two line breaks and the URL
-    var contentWithLink = buttonContent + "\n\n" + "Source: " + buttonURL;
+    var contentWithLink = buttonContent + "\n\n" + "Source: " + url;
     alert(contentWithLink);
     };
 
