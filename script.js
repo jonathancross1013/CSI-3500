@@ -295,11 +295,13 @@ function toggleDarkMode() {
         moonIcon.style.display = 'none';
         sunIcon.style.display = 'inline-block';
         modeText.textContent = 'Light Mode';
+        document.getElementById("sidebar-logo").setAttribute("src", "Images/logoDarkMode.PNG")
     } else {
         localStorage.setItem('darkMode', 'disabled');
         moonIcon.style.display = 'inline-block';
         sunIcon.style.display = 'none';
         modeText.textContent = 'Dark Mode';
+        document.getElementById("sidebar-logo").setAttribute("src", "Images/logo.PNG")
     }
 }
 
