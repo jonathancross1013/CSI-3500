@@ -247,7 +247,7 @@ function showMainCategory(category) {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById("yourButtonId").addEventListener("click", addButtonToSubcategory);
+    document.getElementById("addReferenceButton").addEventListener("click", addButtonToSubcategory);
 
     var tabLinks = document.getElementsByClassName("tablinks");
     for (var i = 0; i < tabLinks.length; i++) {
@@ -303,16 +303,10 @@ window.addEventListener('message', function(event) {
 });
 
 function saveReference(name, content, category) {
-    chrome.storage.sync.get('references', function(result) {
-        var references = JSON.parse(chrome.storage.getItem('references')) || [];
-        var newReference = { name: name, content: content, category: category };
-        references.push(newReference);
-        chrome.storage.setItem('references', JSON.stringify(references));
-
-        chrome.storage.sync.set({ 'references' : references }, function(){
-            console.log(newReference);
-        })
-    });
+    var references = JSON.parse(localStorage.getItem('references')) || [];
+    var newReference = { name: name, content: content, category: category };
+    references.push(newReference);
+    localStorage.setItem('references', JSON.stringify(references));
 }
 
 
