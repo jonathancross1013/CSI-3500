@@ -4,13 +4,6 @@ window.onload = function () {
         createNewTab(tabName);
     });
     populateSubcategorySelect();
-
-    var savedReferences = JSON.parse(localStorage.getItem('references')) || [];
-    savedReferences.forEach(function (savedReferences) {
-        updateSubcategory(savedReferences.name, savedReferences.content, savedReferences.url, savedReferences.category)
-    });
-    //Remove all references
-    //localStorage.removeItem('references');
 };
 
 function saveTabsToStorage() {
@@ -33,19 +26,6 @@ function populateSubcategorySelect() {
         select.appendChild(option);
     });
 }
-
-function sendCategoriesToExtension() {
-    var categoryElement = document.getElementById('category-container');
-    if (categoryElement) {
-        try {
-            var categories = [];
-            window.postMessage({ type: "SEND_CATEGORIES", categories: categories }, "*");
-        } catch (error) {
-            console.error("Error sending categories to extension:", error);
-        }
-    }
-}
-
 
 function toggleSubTab(subtabName) {
     var subtab = document.getElementById(subtabName);
@@ -117,16 +97,17 @@ function createNewTab(categoryName) {
         openTab(event, categoryName.toLowerCase().replace(/\s+/g, ''));
         openSubTab(event, categoryName.toLowerCase().replace(/\s+/g, ''));
 
-        localStorage.getItem({categories: []}, function(data) {
-            let categories = data.categories;
-            if(categories.indexOf(categoryName) === -1) {
-                categories.push(categoryName);
-                localStorage.setItem({categories: categories}, function() {
-                    console.log('Categories updated with:', categoryName);
-                });
-            }
-        });
-    };
+    chrome.storage.sync.get({categories: []}, function(data) {
+        let categories = data.categories;
+        if(categories.indexOf(categoryName) === -1) {
+            categories.push(categoryName);
+            chrome.storage.sync.set({categories: categories}, function() {
+                console.log('Categories updated with:', categoryName);
+            });
+        }
+    });
+
+};
 
     var removeButton = document.createElement("button");
     removeButton.textContent = "Remove Category";
@@ -155,19 +136,6 @@ function removeCategory(categoryName) {
         tabContainerToRemove.parentNode.removeChild(tabContainerToRemove);
         saveTabsToStorage();
     }
-
-
-
-    var savedReferences = JSON.parse(localStorage.getItem('references')) || [];
-    
-    var referenceCategoryToRemove = tabContainerToRemove.querySelector('.category-text').innerHTML
-
-    var updatedReferences = savedReferences.filter(function(savedReference) {
-        return savedReference.category !== referenceCategoryToRemove;
-    });
-
-    // Update the localStorage with the new array
-    localStorage.setItem('references', JSON.stringify(updatedReferences));
 }
 
 window.addEventListener('beforeunload', saveTabsToStorage);
@@ -207,8 +175,8 @@ function addButtonToSubcategory() {
     var buttonURL = document.getElementById('newButtonURL').value.trim();
     var selectedSubcategory = document.getElementById('subcategorySelect').value;
 
-    if (!buttonName || !buttonContent || !buttonURL) {
-        alert('Please fill out the name, content, and URL for the button.');
+    if (!buttonName || !buttonContent) {
+        alert('Please fill out the name and content for the reference.');
         return;
     }
 
@@ -227,29 +195,10 @@ function addButtonToSubcategory() {
         alert('Selected sub-category does not exist.');
     }
     
-    saveReference(document.getElementById('newButtonName').value, document.getElementById('newButtonContent').value, document.getElementById('newButtonURL').value, document.getElementById('subcategorySelect').value)
-
     // Clear the form fields
     document.getElementById('newButtonName').value = '';
     document.getElementById('newButtonContent').value = '';
-    document.getElementById('newButtonURL').value = ''; // Clear the URL field as well
-}
-
-function updateSubcategory(buttonName, buttonContent, url, selectedSubcategory) {
-    var newButton = document.createElement('button');
-    newButton.textContent = buttonName;
-    newButton.onclick = function() {
-    // Concatenate the content with two line breaks and the URL
-    var contentWithLink = buttonContent + "\n\n" + "Source: " + url;
-    alert(contentWithLink);
-    };
-
-    var subcategoryDiv = document.getElementById(selectedSubcategory);
-    if (subcategoryDiv) {
-        subcategoryDiv.appendChild(newButton);
-    } else {
-        alert('Selected sub-category does not exist.');
-    }
+    document.getElementById('newButtonURL').value = '';
 }
 
 
@@ -283,6 +232,20 @@ function showMainCategory(category) {
         settingsContent.style.display = 'block';
     }
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById("yourButtonId").addEventListener("click", addButtonToSubcategory);
+
+    var tabLinks = document.getElementsByClassName("tablinks");
+    for (var i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].addEventListener('click', function() {
+            var tabId = this.getAttribute('data-tab-id');
+            toggleTabContent(tabId);
+
+
+        });
+    }
+});
 
 function toggleDarkMode() {
     var body = document.body;
@@ -326,9 +289,9 @@ window.addEventListener('message', function(event) {
     }
 });
 
-function saveReference(name, content, url, category) {
+function saveReference(name, content, category) {
     var references = JSON.parse(localStorage.getItem('references')) || [];
-    var newReference = { name: name, content: content, url: url, category: category };
+    var newReference = { name: name, content: content, category: category };
     references.push(newReference);
     localStorage.setItem('references', JSON.stringify(references));
 }
@@ -370,47 +333,13 @@ function changeHeaderColor(event) {
 }
 
 function toggleFontSizeDropdown() {
-    // This function will toggle the display of the font size selector dropdown
     var fontSizeDropdown = document.getElementById('fontSizeSelector');
     fontSizeDropdown.style.display = fontSizeDropdown.style.display === 'none' ? 'block' : 'none';
 }
 
 function changeFontSize(fontSize) {
-    // This function will apply the selected font size to the entire site
     document.documentElement.style.fontSize = fontSize;
 }
-
-function openTextColorPicker() {
-    var colorPicker = document.getElementById('textColorPicker');
-    if (!colorPicker) {
-        colorPicker = document.createElement('input');
-        colorPicker.type = 'color';
-        colorPicker.id = 'textColorPicker';
-        colorPicker.oninput = changeTextColor;
-        colorPicker.style.display = 'none';
-        document.body.appendChild(colorPicker);
-    }
-    colorPicker.click();
-}
-
-function changeTextColor(event) {
-    var textColor = event.target.value;
-    document.body.style.color = textColor; // Apply color to text
-    localStorage.setItem('textColor', textColor); // Save color to localStorage
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    var changeTextColorButton = document.getElementById('changeTextColorButton');
-    if (changeTextColorButton) {
-        changeTextColorButton.addEventListener('click', openTextColorPicker);
-    }
-
-    // Load the saved color from localStorage on page load
-    var savedColor = localStorage.getItem('textColor');
-    if (savedColor) {
-        document.body.style.color = savedColor;
-    }
-});
 
 
 function openBackgroundColorPicker() {
@@ -438,10 +367,42 @@ document.addEventListener('DOMContentLoaded', function() {
         changeBackgroundColorButton.addEventListener('click', openBackgroundColorPicker);
     }
 
-    // Load the saved color from localStorage on page load
     var savedColor = localStorage.getItem('backgroundColor');
     if (savedColor) {
         document.body.style.backgroundColor = savedColor;
+    }
+});
+
+
+function openTextColorPicker() {
+    var colorPicker = document.getElementById('textColorPicker');
+    if (!colorPicker) {
+        colorPicker = document.createElement('input');
+        colorPicker.type = 'color';
+        colorPicker.id = 'textColorPicker';
+        colorPicker.oninput = changeTextColor;
+        colorPicker.style.display = 'none';
+        document.body.appendChild(colorPicker);
+    }
+    colorPicker.click();
+}
+
+function changeTextColor(event) {
+    var textColor = event.target.value;
+    document.body.style.color = textColor;
+    localStorage.setItem('textColor', textColor);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var changeTextColorButton = document.getElementById('changeTextColorButton');
+    if (changeTextColorButton) {
+        changeTextColorButton.addEventListener('click', openTextColorPicker);
+    }
+
+    // Load the saved color from localStorage on page load
+    var savedColor = localStorage.getItem('textColor');
+    if (savedColor) {
+        document.body.style.color = savedColor;
     }
 });
 
@@ -489,3 +450,4 @@ document.addEventListener('DOMContentLoaded', function() {
         colorPicker.click();
     });
 });
+
