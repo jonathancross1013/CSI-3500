@@ -209,7 +209,7 @@ header {
   transition: background-color 0.5s, color 0.5s;
 }
 
-#sidebar {
+.sidebar {
     height: 100vh;
     width: 250px;
     position: fixed;
@@ -223,7 +223,7 @@ header {
     transition: background-color 0.5s, color 0.5s;
 }
 
-#sidebar .sidebar-link {
+.sidebar-link {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
@@ -232,58 +232,35 @@ header {
     transition: 0.3s;
 }
 
-#sidebar .sidebar-link:hover {
+.sidebar-link:hover {
     color: #f1f1f1;
     background-color: #575757;
 }
 
-#sidebar .sidebar-link.active {
+.sidebar-link.active {
     background-color: #009688;
     color: white;
 }
 
-#sidebar .sidebar-link i.fas.fa-cog {
-    margin-right: 5px;
-}
-
-#sidebar .sidebar-link:hover i.fas.fa-cog {
-    transform: scale(1.2);
-    transition: transform 0.3s ease;
-}
-
-#sidebar .sidebar-link i.fas.fa-user {
+.sidebar-link i.fas {
     margin-right: 8px;
 }
 
-#sidebar .sidebar-link:hover i.fas.fa-user {
+.sidebar-link:hover i.fas {
     transform: scale(1.2);
-    transition: transform 0.3s ease;
-}
-
-#sidebar .sidebar-link i.fas.fa-book {
-    margin-right: 8px;
-}
-
-#sidebar .sidebar-link:hover i.fas.fa-book {
-    transform: scale(1.2);
-    transition: transform 0.3s ease;
-}
-
-#sidebar .sidebar-link i.fas.fa-flag {
-    margin-right: 6px;
-}
-
-#sidebar .sidebar-link:hover i.fas.fa-flag {
-    transform: scale(1.2);
-    transition: transform 0.3s ease;
 }
 
 #sidebar-logo {
     display: block;
     max-width: 100%;
     height: auto;
-    padding: 0px;
+    padding: 0;
     margin-bottom: 20px;
+}
+
+#dark-mode-toggle:hover .fa-sun,
+#dark-mode-toggle:hover .fa-moon {
+    transform: scale(1.2);
 }
 
 #dark-mode-toggle .fa-moon,
