@@ -132,8 +132,13 @@ function createNewTab(categoryName) {
     removeButton.textContent = "Remove Category";
     removeButton.className = "remove-button";
     removeButton.onclick = function (event) {
-        removeCategory(categoryName);
-        event.stopPropagation();
+        var response = confirm("Are you sure you want to remove this category?")
+
+        if (response)
+        {
+            removeCategory(categoryName);
+            event.stopPropagation();
+        }
     };
 
     tabContainer.appendChild(removeButton);
