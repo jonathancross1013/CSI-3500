@@ -36,7 +36,6 @@ function populateSubcategorySelect() {
 
 function sendCategoriesToExtension() {
     var categoryElement = document.getElementById('category-container');
-    console.log(categoryElement)
     if (categoryElement) {
         try {
             var categories = [];
@@ -105,10 +104,6 @@ function generateNewCategory() {
 }
 
 function createNewTab(categoryName) {
-    console.log(localStorage.getItem('references'));
-
-
-
     var tabContainer = document.createElement("div");
     var newTabContent = document.createElement("div");
     var categoryText = document.createElement("span");
@@ -122,11 +117,11 @@ function createNewTab(categoryName) {
         openTab(event, categoryName.toLowerCase().replace(/\s+/g, ''));
         openSubTab(event, categoryName.toLowerCase().replace(/\s+/g, ''));
 
-        chrome.storage.sync.get({categories: []}, function(data) {
+        localStorage.getItem({categories: []}, function(data) {
             let categories = data.categories;
             if(categories.indexOf(categoryName) === -1) {
                 categories.push(categoryName);
-                chrome.storage.sync.set({categories: categories}, function() {
+                localStorage.setItem({categories: categories}, function() {
                     console.log('Categories updated with:', categoryName);
                 });
             }
