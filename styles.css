@@ -6,8 +6,8 @@ body {
 }
 
 header {
-    background-color: #009688;
-    color: white;
+    background-color: #ffffff;
+    color: black;
     text-align: center;
     padding: 1rem;
     margin: 0 auto;
@@ -205,11 +205,11 @@ header {
 
 .dark-mode header {
   background-color: #111;
-  color: #818181;
+  color: #ffffff;
   transition: background-color 0.5s, color 0.5s;
 }
 
-.sidebar {
+#sidebar {
     height: 100vh;
     width: 250px;
     position: fixed;
@@ -221,46 +221,70 @@ header {
     padding-top: 20px;
     border-right: 2px solid #818181;
     transition: background-color 0.5s, color 0.5s;
+    color: #111;
 }
 
-.sidebar-link {
+#sidebar .sidebar-link {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+
     display: block;
     transition: 0.3s;
 }
 
-.sidebar-link:hover {
+#sidebar .sidebar-link:hover {
     color: #f1f1f1;
     background-color: #575757;
 }
 
-.sidebar-link.active {
+#sidebar .sidebar-link.active {
     background-color: #009688;
     color: white;
 }
 
-.sidebar-link i.fas {
+#sidebar .sidebar-link i.fas.fa-cog {
+    margin-right: 5px;
+}
+
+#sidebar .sidebar-link:hover i.fas.fa-cog {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+#sidebar .sidebar-link i.fas.fa-user {
     margin-right: 8px;
 }
 
-.sidebar-link:hover i.fas {
+#sidebar .sidebar-link:hover i.fas.fa-user {
     transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+#sidebar .sidebar-link i.fas.fa-book {
+    margin-right: 8px;
+}
+
+#sidebar .sidebar-link:hover i.fas.fa-book {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+#sidebar .sidebar-link i.fas.fa-flag {
+    margin-right: 6px;
+}
+
+#sidebar .sidebar-link:hover i.fas.fa-flag {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
 }
 
 #sidebar-logo {
     display: block;
     max-width: 100%;
     height: auto;
-    padding: 0;
+    padding: 0px;
     margin-bottom: 20px;
-}
-
-#dark-mode-toggle:hover .fa-sun,
-#dark-mode-toggle:hover .fa-moon {
-    transform: scale(1.2);
 }
 
 #dark-mode-toggle .fa-moon,
@@ -309,11 +333,12 @@ header {
 }
 
 .content-area {
-    font-size: 1rem;
+    font-size: 1rem; /* This will be relative to the root font-size */
 }
 
 .tablinks, .subtablinks, .main-category, .sidebar-link {
-    font-size: 1rem;
+    font-size: 1rem; /* This should now scale with the body font-size */
+    /* Other styles */
 }
 
 button {
