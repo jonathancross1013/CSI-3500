@@ -4,6 +4,11 @@ window.onload = function () {
         createNewTab(tabName);
     });
     populateSubcategorySelect();
+
+    var savedReferences = JSON.parse(localStorage.getItem('references')) || [];
+    savedReferences.forEach(function (savedReferences) {
+        updateSubcategory(savedReferences.name, savedReferences.content, savedReferences.url, savedReferences.category)
+    });
 };
 
 function saveTabsToStorage() {
@@ -98,6 +103,10 @@ function generateNewCategory() {
 }
 
 function createNewTab(categoryName) {
+    console.log(localStorage.getItem('references'));
+
+
+
     var tabContainer = document.createElement("div");
     var newTabContent = document.createElement("div");
     var categoryText = document.createElement("span");
@@ -111,17 +120,16 @@ function createNewTab(categoryName) {
         openTab(event, categoryName.toLowerCase().replace(/\s+/g, ''));
         openSubTab(event, categoryName.toLowerCase().replace(/\s+/g, ''));
 
-    chrome.storage.sync.get({categories: []}, function(data) {
-        let categories = data.categories;
-        if(categories.indexOf(categoryName) === -1) {
-            categories.push(categoryName);
-            chrome.storage.sync.set({categories: categories}, function() {
-                console.log('Categories updated with:', categoryName);
-            });
-        }
-    });
-
-};
+        chrome.storage.sync.get({categories: []}, function(data) {
+            let categories = data.categories;
+            if(categories.indexOf(categoryName) === -1) {
+                categories.push(categoryName);
+                chrome.storage.sync.set({categories: categories}, function() {
+                    console.log('Categories updated with:', categoryName);
+                });
+            }
+        });
+    };
 
     var removeButton = document.createElement("button");
     removeButton.textContent = "Remove Category";
@@ -209,10 +217,34 @@ function addButtonToSubcategory() {
         alert('Selected sub-category does not exist.');
     }
     
+    saveReference(document.getElementById('newButtonName').value, document.getElementById('newButtonContent').value, document.getElementById('newButtonURL').value, document.getElementById('newButtonURL').value)
+
     // Clear the form fields
     document.getElementById('newButtonName').value = '';
     document.getElementById('newButtonContent').value = '';
     document.getElementById('newButtonURL').value = ''; // Clear the URL field as well
+}
+
+function updateSubcategory(buttonName, buttonContent, url, selectedSubcategory) {
+    buttonName = buttonName;
+    buttonContent = buttonContent;
+    buttonURL = url;
+    selectedSubcategory = selectedSubcategory;
+
+    var newButton = document.createElement('button');
+    newButton.textContent = buttonName;
+    newButton.onclick = function() {
+    // Concatenate the content with two line breaks and the URL
+    var contentWithLink = buttonContent + "\n\n" + "Source: " + buttonURL;
+    alert(contentWithLink);
+    };
+
+    var subcategoryDiv = document.getElementById(selectedSubcategory);
+    if (subcategoryDiv) {
+        subcategoryDiv.appendChild(newButton);
+    } else {
+        alert('Selected sub-category does not exist.');
+    }
 }
 
 
@@ -289,15 +321,11 @@ window.addEventListener('message', function(event) {
     }
 });
 
-function saveReference(name, content, category) {
+function saveReference(name, content, url, category) {
     var references = JSON.parse(localStorage.getItem('references')) || [];
-    var newReference = { name: name, content: content, category: category };
+    var newReference = { name: name, content: content, url: url, category: category };
     references.push(newReference);
     localStorage.setItem('references', JSON.stringify(references));
-
-    chrome.storage.sync.set({ 'references': references }, function() {
-        console.log('Reference saved:', newReference);
-    });
 }
 
 
