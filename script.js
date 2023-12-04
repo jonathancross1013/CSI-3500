@@ -29,6 +29,7 @@ function populateSubcategorySelect() {
 
 function sendCategoriesToExtension() {
     var categoryElement = document.getElementById('category-container');
+    console.log(categoryElement)
     if (categoryElement) {
         try {
             var categories = [];
@@ -246,20 +247,6 @@ function showMainCategory(category) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById("addReferenceButton").addEventListener("click", addButtonToSubcategory);
-
-    var tabLinks = document.getElementsByClassName("tablinks");
-    for (var i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].addEventListener('click', function() {
-            var tabId = this.getAttribute('data-tab-id');
-            toggleTabContent(tabId);
-
-
-        });
-    }
-});
-
 function toggleDarkMode() {
     var body = document.body;
     var modeText = document.getElementById('dark-mode-text');
@@ -307,6 +294,10 @@ function saveReference(name, content, category) {
     var newReference = { name: name, content: content, category: category };
     references.push(newReference);
     localStorage.setItem('references', JSON.stringify(references));
+
+    chrome.storage.sync.set({ 'references': references }, function() {
+        console.log('Reference saved:', newReference);
+    });
 }
 
 
