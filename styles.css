@@ -40,7 +40,7 @@ header {
 
 .tabcontent {
     display: none;
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
@@ -66,10 +66,6 @@ header {
 
 .subtablinks.active {
     display: block;
-}
-
-#nielson.tabcontent.subtabcontent {
-    margin-left: 30px;
 }
 
 
