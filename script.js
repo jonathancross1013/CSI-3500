@@ -213,7 +213,7 @@ function addButtonToSubcategory() {
     var selectedSubcategory = document.getElementById('subcategorySelect').value;
 
     if (!buttonName || !buttonContent) {
-        alert('Please fill out the name, content, and URL for the button.');
+        alert('Please fill out the name and content for the button.');
         return;
     }
 
