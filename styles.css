@@ -183,7 +183,7 @@ header {
     display: none;
     padding: 50px;
     border: none;
-    margin-top: 70px; /* Added margin-top to fix spacing between subtab buttons and subtabcontent, mainly fixed for larger text sizes*/
+    margin-top: 150px; /* Added margin-top to fix spacing between subtab buttons and subtabcontent, mainly fixed for larger text sizes*/
     margin-bottom: 20px;
 }
 
