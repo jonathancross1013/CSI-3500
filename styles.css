@@ -177,10 +177,11 @@ header {
   background-color: #ccc;
 }
 
-.tabcontent,
+/* .tabcontent was removed, leaving only .tabcontent above, and leaving .subtabcontent as its own style call */
+
 .subtabcontent {
     display: none;
-    padding: 20px;
+    padding: 50px;
     border: none;
     margin-bottom: 20px;
 }
@@ -355,4 +356,13 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+h2 {
+ border: 3mm ridge #D1AF47; /* border box for the subtab headers */
+}
+
+ol {
+   border: 4mm ridge #D1AF47; /* border box for the subtab content */
+   border-radius: 20px; /* Gives the border a roundness to its edge. Increase this, and the roundness will increase. */
 }
