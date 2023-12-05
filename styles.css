@@ -373,4 +373,5 @@ h2 {
 ol {
    border: 4mm ridge #D1AF47; /* border box for the subtab content */
    border-radius: 20px; /* Gives the border a roundness to its edge. Increase this, and the roundness will increase. */
+   padding: 40px;
 }
