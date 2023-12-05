@@ -102,9 +102,11 @@
         <div class="subtabs">
             <button class="subtablinks" onclick="toggleSubTab('nielson')">Nielson's Heuristics</button>
             <button class="subtablinks" onclick="toggleSubTab('ucd')">User-Centered Design</button>
+	    <button class="subtablinks" onclick="toggleSubTab('fpid')">First Principles of Interaction Design A-F</button>
+            <button class="subtablinks" onclick="toggleSubTab('fpid2')">First Principles of Interaction Design L-V</button>
         </div>
                 <div id="nielson" class="tabcontent subtabcontent" style="display: none;">
-                <h2>10 Usability Heuristics</h2>
+                <h2>Jakob Nielsen's 10 Usability Heuristics</h2>
     <ol>
         <li><strong>Visibility of System Status:</strong> The system should always keep users informed about what is going on, through appropriate feedback within reasonable time.</li>
         <li><strong>Match between System and the Real World:</strong> The system should speak the users' language, with words, phrases, and concepts familiar to the user, rather than system-oriented terms.</li>
@@ -120,7 +122,6 @@
         </div>
  <div id="ucd" class="tabcontent subtabcontent" style="display: none;">
             	<h2>User-Centered Design</h2>
-    <ol>
 <ol>
  	<li><strong>Understand:</strong> Conduct extensive research to understand the target users, their needs, goals, and pain points.</li>
  	<li><strong>Define:</strong> Distill insights into clear design goals, including user personas, scenarios, and the design problem.</li>
@@ -132,7 +133,61 @@
   	<li><strong>Evaluate:</strong> Continuously evaluate the product's performance and user satisfaction after launch.</li>
   	<li><strong>Maintain and Evolve:</strong> Maintain the product, adapt to changing user needs, and make ongoing improvements.</li>
 </ol>
-
+<div id="fpid" class="tabcontent subtabcontent" style="display: none;">
+      <h2>Bruce Tognazzini's First Principles of Interaction Design A-F</h2>
+<ol>
+    <li><strong>Aeshetics:</strong> <em>Fashion</em> should never trump usability; User test the visual design as thoroughly as the behavioral design.</li>
+    <li><strong>Autonomy:</strong> The computer, interface, and task enviornment all "belong" to the user, but user-autonomy doesn't mean abandoning rules. 
+    Enable users to make their own decisions, even ones aesthetically poor or behaviorally less efficient. Exercise <em>responsible</em> control. Keep status information up to date
+    and within easy view through the use of accurate status mechanisms.</li>
+    <li><strong>Color:</strong> When using color to convey info in the interface, also use clear, secondary cues to convey the info to those who cannot see the colors presented. 
+    Do not avoid color in the interface, and do not strip away or overwhelm color cues because of a passing graphic-design fad.</li>
+    <li><strong>Consistency:</strong> <br /> <strong>1) Levels of Consistency</strong> The importance of maintaining strict consistency will vary. Top level consistency should maintain a general look and feel across the products/services.
+    Consistency should also be present in the face of multiple products, such as Microsoft Office. A visual designer should also establish a purposeful and well thought-through visual language, shaped by usability testing.
+    The appearance of small visisble structs, such as icons, symbols, buttons, scroll bars, etc. needs to be strictly controlled so people are not spending precious time trying to figure out different, simple features.
+    Any invisible structures should have a secret rule fo being crisp and clean. For example, "you can click and drag the edges of current Macintosh windows to resize them". This is always consistent, which inivisible structures should model.
+    Objects that convey info, should rarely if ever be made invisible. Also keep in mind user's behavior, such as shortcut keys from similar industry products maintaining their meaning. <br />
+    <strong>2) Induced Inconsistency</strong> It is important to be visually inconsistent when things act differently as it is to be visually consistent when things act the same.
+    Make objects that act diffeently look different, and make pages that have changed <em>look</em> changed. <br />
+    <strong>3) Continuity</strong> Over time, strive for continuity, not consistency. The goal is continuity, where there is a thread that weaves through the various products and releases, guiding user, but not tying everything to the past. <br />
+    <strong>4) Consistency with User Expectation</strong> No matter how sound of an argument can be made, if users expect something to work a different way, you will be facing an uphiil and usually unwinnable battle to change those expectations. 
+    Unless there exists a clear advantage in your way, go with what users expect.</li>
+    <li><strong>Defaults:</strong> Defaults within fields should be easy to "blow away", and should be "intelligent" and responsive. Replace the word "default" with a more meaningful and responsive term, such as "Revert to Standard Settings."
+    Both the vocabulary and visual design must communicate the scope of a reversion. Through user testing, make sure users understand the extent of the restoration.</li>
+    <li><strong>Discoverability:</strong> Any attempt to hide complexity will serve to increase it, and if you choose to hide complexity, do so in the showroom only. If the user cannot find it, it <em>does not exist.</em> 
+    Controls and other objects necessary for the successful use of software should be visibly accessible at all times. There is no "elegance" exception to discoverability, and controls don't belong in the middle of the content area, with the exception of small mobile devices
+    Communicate any gestural(relating to movements) vocabulary with visual diagrams! And don't forget to user-test for discovery.</li>
+    <li><strong>Efficiency of the User:</strong> Look beyond the efficieny of a machine, and look at the user's productivity, not the computer's. <em>Keep the user occupied.</em> 
+    To maximize the efficiency of a business/organization, maximize everyone's efficiency. Any great efficiency breakthroughs in software are to be found in the fundamental architecture of the system, not in the surface design of the interface.
+    Remember, error messages should actually help. They should explain what's wrong, tell the user specifically what to do about it, and leave open the possibility the message is improperly being generated.</li>
+    <li><strong>Explorable Interfaces:</strong> Give users well-marked roads and landmarks, and give them freedom on these paths. Place some deep ruts within this path, to help guide early and experienced users with navigation.
+    Offer users stable perceptual cues to give them a sense of "home", and make acstion reversible, allowing undo as well. Always have a way out, and make it easy and attractive to stay in.</li>
+    <li><strong>Fitts's Law:</strong> Use large objects for important functions, and small objects for functions you would prefer users not perform. Fitts's Law requires a stop watch test.</li>
+</ol>
+</div>
+    
+    <div id="fpid2" class="tabcontent subtabcontent" style="display: none;">
+       <h2>Bruce Tognazzini's First Principles of Interaction Design L-V</h2>
+<ol>
+    <li><strong>Human Interface Objects:</strong> Human-interface objects include folders, documents, buttons, menus, and the trashcan. These objects can be seen, heard, felt, or otherwise perceived, and have a standard way of being manipulated.
+    These objects should be understandable, self-consistent, and stable. Always use a new object when you want a user to interact with it in a different way or when it will result in different behavior.</li>
+            
+    <li>strong>Latency Reduction:</strong> Use multi-threading to push latency into the background. Latency can be hidden from users through multi-tasking techniques. Reduce the user's experience of latency, and keep users informed when facing delay.
+    Eliminate any element of the application that is not helping to make it faster to begin with.</li>
+    <li><strong>Learnability:</strong> Limit the trade-offs when considering learnability vs. usability, and consider whether the product or service will be used infrequently/only one, or if it will be used habitually.
+    Habitually, prioritize Usability, otherwise prioritize Learnability. No matter what though, avoid only testing for learnability.</li>
+    <li><strong>Protect Users' Work:</strong> Ensure that users never lose their work. They should never lose work due to an error on their part, with very few exceptions like a sudden loss of power without proper power protection. </li>
+    <li>
+    <strong>Readability:</strong> Text that must be read should have high contrast. Favor black text on white or pale yellow backgrounds. Use font sizes that are large enough to be readable on standard displays.
+    Favor large characters for the actual data you intend to display, as opposed to labels and instructions. Menu and button labels should have the key word(s) first, forming unique labels. Test any and all designs on your oldest expected user population.
+    There's often an inverse relationship between the "prettiness" of a font and its readability.</li>
+    <li><strong>Simpliciy:</strong> Balance ease of installation vs. ease of use, and avoid the "Illusion of Simplicity". It is okay to make the user's environment simpler when they are learning by hiding more advanced pathways and capabilities initially.
+    Do not simplify by eliminating necessary capabilites.</li>
+    <li><strong>State</strong> Because many of the browser-based products exist in a stateless environment, we have the responsibility to track state as needed. State info should be stored in encrypted form on the server when they log off.
+    Make it <em>clear</em> what you will be storing, and protect this user's stored info.</li>
+    <li><strong>Visible Navigation:</strong> Make navigation visible, and limit screen counts by using overlays.</li>
+</ol>
+    </div>
         </div>
     </div>
 
